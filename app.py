@@ -5,7 +5,8 @@ web.config.debug = False
 
 urls = (
     '/', 'index',
-    '/login', 'login'
+    '/login', 'login',
+    '/logout', 'logout'
 )
 
 # Crear una aplicación web.py
@@ -33,6 +34,11 @@ class login:
             raise web.seeother('/')
         else:
             return render.login("El nombre de usuario o contraseña son incorrectos")
+            
+class logout:
+    def GET(self):
+        session.kill()
+        raise web.seeother('/login')
 
 if __name__ == '__main__':
     app.run()
